@@ -30,9 +30,9 @@ const HeroContent: React.FC = () => {
     }, []);
 
     return (
-        <div
+        <div ref={containerRef}
         
-            className="w-full h-screen flex  bg-slate-900 "
+            className="overflow-hidden relative w-full h-screen flex  bg-slate-900 "
             style={{
                 backgroundImage: `url(${backgroundImage})`,
                 backgroundSize: 'cover',
