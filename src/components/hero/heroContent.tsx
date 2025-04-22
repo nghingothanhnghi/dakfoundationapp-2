@@ -1,30 +1,50 @@
-import React from 'react';
-import HeroHeadline from './heroHeadline';
-import HeroNeonGlobe from './heroNeonGlobe';
-import ButtonPrimary from '../button/buttonPrimary';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import HeroCover from './heroCover';
+import HeroProducts from './heroProducts';
 import backgroundImage from '../../assets/line-bg-1.png';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const HeroContent: React.FC = () => {
+
+    const containerRef = useRef<HTMLDivElement>(null);
+
+
+    useEffect(() => {
+        const container = containerRef.current;
+        if (container) {
+            gsap.to(container, {
+                xPercent: -100 * (container.children.length - 1), // Move by the number of sections
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: container,
+                    start: 'top top',
+                    pin: true,
+                    scrub: 1,
+                    end: () => `+=${container.offsetWidth * (container.children.length - 1)}`, // Adjust end based on number of sections
+                },
+            });
+        }
+    }, []);
+
     return (
         <div
-            className="w-full h-full flex flex-col items-center justify-center bg-slate-900 overflow-hidden"
+        
+            className="w-full h-screen flex  bg-slate-900 "
             style={{
                 backgroundImage: `url(${backgroundImage})`,
-                backgroundSize: 'cover', // Ensures the image covers the entire div
-                backgroundPosition: 'center', // Centers the image
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
-                position: 'relative',
-                minHeight: '100vh'
             }}
         >
-            <div className="flex flex-col items-center justify-center gap-8 z-10">
-                <HeroHeadline />
-                <div className="relative" style={{ height: '400px' }}>
-                    <HeroNeonGlobe />
-                </div>
-                <div className="mt-8">
-                    <ButtonPrimary label="Get Started" width="20rem" />
-                </div>
+            <div className="flex-shrink-0 w-full h-full flex items-center justify-center">
+                <HeroCover />
+            </div>
+            <div className="flex-shrink-0 w-full h-full flex items-center justify-center">
+                <HeroProducts />
             </div>
         </div>
     );

@@ -1,18 +1,85 @@
-import React from 'react';
-import {Canvas} from '@react-three/fiber';
-import {OrbitControls, PerspectiveCamera, useGLTF} from '@react-three/drei';
+import React, { useEffect, useRef, Suspense, useState } from 'react';
+import { Canvas, useLoader } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+// For React projects, we need to handle static assets differently
+// This path is relative to the public directory
+const MODEL_PATH = '/models/gradient_globe.glb';
+
+// Add animation to the loaded globe model
+function AnimatedGlobe() {
+    // Use a more generic type that can work with both THREE.Group and THREE.Mesh
+    const meshRef = useRef<THREE.Object3D>(null);
+    const [modelError, setModelError] = useState(false);
+    
+    // Try to load the model with error handling
+    let gltf;
+    try {
+        gltf = useLoader(GLTFLoader, MODEL_PATH);
+    } catch (error) {
+        console.error('Error loading model:', error);
+        if (!modelError) setModelError(true);
+    }
+    
+    // Animation effect
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (meshRef.current) {
+                meshRef.current.rotation.y += 0.005;
+            }
+        }, 16);
+        
+        return () => clearInterval(interval);
+    }, []);
+    
+    // If model failed to load, show a fallback sphere
+    if (modelError || !gltf) {
+        return (
+            <mesh ref={meshRef}>
+                <sphereGeometry args={[1, 32, 32]} />
+                <meshStandardMaterial 
+                    color="#00ffff" 
+                    emissive="#004444"
+                    wireframe 
+                    transparent
+                    opacity={0.8}
+                />
+            </mesh>
+        );
+    }
+    
+    // Return the loaded model with animation
+    return <primitive ref={meshRef} object={gltf.scene} scale={1} />;
+}
+
+// Fallback component to show while the model is loading
+const ModelLoadingFallback = () => {
+    return (
+        <mesh>
+            <sphereGeometry args={[1, 32, 32]} />
+            <meshStandardMaterial 
+                color="#444444" 
+                wireframe 
+                transparent
+                opacity={0.5}
+            />
+        </mesh>
+    );
+};
 
 const HeroNeonGlobe: React.FC = () => {
     return (
-        <div className="w-[600px] h-[400px] relative overflow-hidden flex items-center justify-center">
-            <div className="transform scale-[0.35] origin-center">
-                <div className="w-[1707.83px] h-[1106.49px] relative origin-top-left rotate-[162.85deg] overflow-hidden">
-                    <img className="w-[567.50px] h-[568.31px] left-[582.07px] top-[186.24px] absolute" src="https://placehold.co/567x568" />
-                    <img className="w-44 h-44 left-[979.96px] top-[494.28px] absolute" src="https://placehold.co/171x170" />
-                    <img className="w-[1521.47px] h-[952.29px] left-[98.36px] top-[95.30px] absolute" src="https://placehold.co/1521x952" />
-                </div>
-            </div>
-        </div>
+        <Canvas camera={{ position: [0, 0, 2.5] }}>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[1, 1, 1]} />
+            <pointLight position={[0, 0, 0]} intensity={1} color="#00ffff" />
+            <Suspense fallback={<ModelLoadingFallback />}>
+                <AnimatedGlobe />
+            </Suspense>
+            <OrbitControls enableZoom={false} enablePan={false} />
+        </Canvas>
     );
 };
 
