@@ -1,13 +1,26 @@
-import * as React from "react";
+import React, { useEffect, useRef } from 'react';
 import { SuperAppBackgroundSection } from "./superAppBackgroundSection";
 import { SuperAppLogo } from "./superAppLogo"
 import { SuperAppDescription } from "./superAppDescription";
 import { SuperAppIconsRow } from "./superAppIconRow";
 
-const SuperAppContent: React.FC = () => {
+interface SuperAppContentProps {
+  setupAnimation: (element: HTMLElement) => void;
+}
+
+
+const SuperAppContent: React.FC<SuperAppContentProps> = ({ setupAnimation }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      setupAnimation(containerRef.current);
+    }
+  }, [setupAnimation]);
   return (
     <SuperAppBackgroundSection>
       <div
+        ref={containerRef}
         className="relative w-full max-w-[1502px] max-md:max-w-full"
       >
         <div className="flex gap-5 max-md:flex-col">

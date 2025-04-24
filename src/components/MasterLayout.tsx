@@ -32,8 +32,8 @@ const MasterLayout: React.FC = () => {
                 <HeroContent setupAnimation={setupAnimation}/>
                 <CloudContent setupAnimation={setupAnimation}/>
                 <BlockContent setupAnimation={setupAnimation}/>
-                <AiContent/>
-                <SuperAppContent/>
+                <AiContent setupAnimation={setupAnimation}/>
+                <SuperAppContent setupAnimation={setupAnimation}/>
             </main>
         </div>
     );

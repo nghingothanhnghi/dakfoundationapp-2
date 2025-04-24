@@ -1,13 +1,25 @@
-import * as React from "react";
+import React, { useEffect, useRef } from 'react';
 import { AiBackgroundSection } from "./aiBackgroundSection";
 import { AiLogo } from "./aiLogo";
 import { AiDescription } from "./aiDescription";
 import { AiIconsRow } from "./aiIconRow";
 
-const AiContent: React.FC = () => {
+interface AiContentProps {
+  setupAnimation: (element: HTMLElement) => void;
+}
+
+const AiContent: React.FC<AiContentProps> = ({ setupAnimation }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      setupAnimation(containerRef.current);
+    }
+  }, [setupAnimation]);
   return (
     <AiBackgroundSection>
       <div
+        ref={containerRef}
         className="relative w-full max-w-[1502px] max-md:max-w-full"
       >
         <div className="flex gap-5 max-md:flex-col">
