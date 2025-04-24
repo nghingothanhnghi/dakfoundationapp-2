@@ -1,14 +1,14 @@
 import React, { useEffect, useRef } from 'react';
-import { CloudBackgroundSection } from "./cloudBackgroundSection";
-import { CloudLogo } from "./cloudLogo";
-import { CloudDescription } from "./cloudDescription";
-import { CloudIconsRow } from "./cloudIconRow";
+import { BlockBackgroundSection } from "./blockBackgroundSection";
+import { BlockLogo } from "./blockLogo";
+import { BlockDescription } from "./blockDescription";
+import { BlockIconsRow } from "./blockIconRow";
 
-interface CloudContentProps {
+interface BlockContentProps {
   setupAnimation: (element: HTMLElement) => void;
 }
 
-const CloudContent: React.FC<CloudContentProps> = ({ setupAnimation }) => {
+const BlockContent: React.FC<BlockContentProps> = ({ setupAnimation }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -17,21 +17,22 @@ const CloudContent: React.FC<CloudContentProps> = ({ setupAnimation }) => {
     }
   }, [setupAnimation]);
   return (
-    <CloudBackgroundSection>
+    <BlockBackgroundSection>
       <div
+        ref={containerRef}
         className="relative w-full max-w-[1502px] max-md:max-w-full"
       >
         <div className="flex gap-5 max-md:flex-col">
           <div className="w-[31%] max-md:ml-0 max-md:w-full">
-            <CloudLogo />
+            <BlockLogo />
           </div>
           <div className="ml-5 w-[69%] max-md:ml-0 max-md:w-full">
-            <CloudDescription />
+            <BlockDescription />
           </div>
         </div>
       </div>
-      <CloudIconsRow />
-    </CloudBackgroundSection>
+      <BlockIconsRow />
+    </BlockBackgroundSection>
   );
 }
-export default CloudContent;
+export default BlockContent;

@@ -6,32 +6,33 @@ import HeroProducts from './heroProducts';
 import backgroundImage from '../../assets/line-bg-1.png';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const HeroContent: React.FC = () => {
-
+interface HeroContentProps {
+    setupAnimation: (element: HTMLElement) => void;
+}
+const HeroContent: React.FC<HeroContentProps> = ({ setupAnimation }) => {
     const containerRef = useRef<HTMLDivElement>(null);
-
 
     useEffect(() => {
         const container = containerRef.current;
         if (container) {
+            setupAnimation(container);
+
+            // Parallax effect for the background image
             gsap.to(container, {
-                xPercent: -100 * (container.children.length - 1), // Move by the number of sections
+                backgroundPositionY: '+=200px', // Adjust this value for the desired parallax effect
                 ease: 'none',
                 scrollTrigger: {
                     trigger: container,
-                    start: 'top top',
-                    pin: true,
-                    scrub: 1,
-                    end: () => `+=${container.offsetWidth * (container.children.length - 1)}`, // Adjust end based on number of sections
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: true,
                 },
             });
         }
-    }, []);
-
+    }, [setupAnimation]);
     return (
-        <div ref={containerRef}
-        
+        <div
+            ref={containerRef}
             className="overflow-hidden relative w-full h-screen flex  bg-slate-900 "
             style={{
                 backgroundImage: `url(${backgroundImage})`,
