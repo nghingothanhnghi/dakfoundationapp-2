@@ -1,6 +1,6 @@
-import * as React from "react";
+import React from 'react';
 
-export const CloudIconsRow: React.FC = () => {
+const CloudIconsRow = React.forwardRef<HTMLDivElement, any>((props, ref) => {
   const icons = [
     { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/79f49d5f6b335654f1dbe4c5ea751ddd326727e1?placeholderIfAbsent=true", alt: "Cloud Service Icon 1", width: "w-28" },
     { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/c0b00e9b6f36a83a31ad0e10a7c336813c30a913?placeholderIfAbsent=true", alt: "Separator", width: "w-8" },
@@ -15,6 +15,7 @@ export const CloudIconsRow: React.FC = () => {
 
   return (
     <section
+      ref={ref}
       className="flex relative flex-wrap gap-2.5 items-center self-center mt-48 ml-32 max-w-full min-h-[122px] w-[753px] max-md:mt-10"
       aria-label="Cloud service partners"
     >
@@ -28,4 +29,6 @@ export const CloudIconsRow: React.FC = () => {
       ))}
     </section>
   );
-};
+});
+
+export default CloudIconsRow;

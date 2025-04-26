@@ -5,8 +5,8 @@ import { HeroFeatureColumn } from "./heroFeatureColumn";
 
 export const HeroFeaturesGrid: React.FC = () => {
   return (
-    <section className="relative self-center mt-64 mb-0 w-full max-w-[1370px] max-md:mt-10 max-md:mb-2.5 max-md:max-w-full">
-      <div className="flex gap-5 max-md:flex-col">
+    <section className="relative self-center mt-64 mb-0 w-full max-md:mt-10 max-md:mb-2.5 max-md:max-w-full">
+      <div className="flex gap-5 max-md:flex-col w-full">
         <div className="w-[23%] max-md:ml-0 max-md:w-full">
           <HeroFeatureColumn description="Globalization with Decentralized Cloud" />
         </div>
