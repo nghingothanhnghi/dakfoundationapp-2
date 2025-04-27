@@ -43,13 +43,25 @@ const HeroHeadline: React.FC = () => {
     <div className="w-full max-w-[1200px] inline-flex flex-col justify-start items-center gap-5 px-4">
       <div 
         ref={line1Ref}
-        className="text-center text-fuchsia-500 text-7xl font-bold font-['Inter'] [text-shadow:_10px_6px_5px_rgb(217_91_255_/_0.50)]"
+        className="text-center text-7xl font-bold bg-clip-text bg-[linear-gradient(347deg,#DE61E6_27.04%,#E4D2F3_58.95%)] [text-shadow:_10px_6px_5px_rgb(217_91_255_/_0.50)]"
+        style={{
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          WebkitTextStrokeWidth: "2px",
+          WebkitTextStrokeColor: "#4AD0FF",
+        }}
       >
         The People's Tech Revolution
       </div>
       <div 
         ref={line2Ref}
-        className="w-full max-w-[801px] text-center text-fuchsia-500 text-5xl font-bold font-['Inter'] leading-[63px] [text-shadow:_10px_6px_5px_rgb(198_46_241_/_0.50)]"
+        className="w-full max-w-[801px] text-center  text-5xl font-bold bg-[linear-gradient(347deg,#DE61E6_27.04%,#E4D2F3_58.95%)] leading-[63px] [text-shadow:_10px_6px_5px_rgb(198_46_241_/_0.50)]"
+        style={{
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          WebkitTextStrokeWidth: "2px",
+          WebkitTextStrokeColor: "#4AD0FF",
+        }}
       >
         Break Barriers - 2 - Build Futures
       </div>

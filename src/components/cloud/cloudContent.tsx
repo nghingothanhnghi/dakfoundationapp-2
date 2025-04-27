@@ -45,7 +45,17 @@ const CloudContent: React.FC<CloudContentProps> = ({ setupAnimation }) => {
         </div>
         <CloudIconsRow ref={iconsRowRef} />
       </CloudBackgroundSection>
-      <div ref={horizontalScrollRef} className="w-full h-screen horizontal-scroll-container overflow-x-hidden whitespace-nowrap">
+      <div ref={horizontalScrollRef} className="w-full h-screen horizontal-scroll-container overflow-x-hidden whitespace-nowrap"
+              style={{
+                backgroundColor: "hsla(266,84%,36%,1)",
+                backgroundImage: `
+                  radial-gradient(at 52% 38%, hsla(328,56%,54%,0.35) 0px, transparent 50%),
+                  radial-gradient(at 8% 88%, hsla(255,16%,84%,0.3) 0px, transparent 50%),
+                  radial-gradient(at 26% 91%, hsla(35,16%,68%,0.3) 0px, transparent 50%),
+                  radial-gradient(at 69% 95%, hsla(50,15%,64%,0.3) 0px, transparent 50%)
+                `
+              }}
+      >
         {/* Add your horizontal content here */}
         <div className="horizontal-content inline-flex">
           {/* Example content */}

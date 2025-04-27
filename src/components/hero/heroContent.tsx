@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HeroCover from './heroCover';
@@ -176,7 +176,7 @@ const HeroContent: React.FC<HeroContentProps> = ({ setupAnimation }) => {
             >
                 <div 
                     ref={(el) => addPanelRef(el, 0)}
-                    className="flex-shrink-0 w-screen h-full flex items-center justify-center"
+                    className=" w-screen h-full flex items-center justify-center"
                     style={{ width: '100vw' }}
                 >
                     <div className="w-full">
@@ -185,7 +185,7 @@ const HeroContent: React.FC<HeroContentProps> = ({ setupAnimation }) => {
                 </div>
                 <div 
                     ref={(el) => addPanelRef(el, 1)}
-                    className="flex-shrink-0 w-screen h-full flex items-center justify-center"
+                    className="w-screen h-full flex items-center justify-center"
                     style={{ width: '100vw' }}
                 >
                     <div className="w-full">

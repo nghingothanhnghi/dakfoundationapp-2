@@ -11,15 +11,93 @@ interface AnimationOptions {
   ease?: string;
   type?: string;
   direction?: 'vertical' | 'horizontal';
+  panels?: HTMLElement[];
+  bgLayer?: HTMLElement;
 }
 
 export const setupScrollAnimation = (
   element: HTMLElement,
   options: AnimationOptions = {}
 ) => {
-  const { opacity = 1, y = 0, duration = 1, ease = 'power3.out', type = 'default', direction = 'vertical' } = options;
+  const { opacity = 1, y = 0, duration = 1, ease = 'power3.out', type = 'default', direction = 'vertical', panels, bgLayer } = options;
 
-  if (direction === 'horizontal') {
+  if (type === 'hero') {
+    if (!panels || !bgLayer) {
+      console.error('Hero animation requires panels and bgLayer options.');
+      return;
+    }
+
+    // Parallax effect for the first background image
+    gsap.to(bgLayer, {
+      backgroundPositionY: '+=200px',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: element,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+      },
+    });
+
+    // Set initial state of background layer
+    gsap.set(bgLayer, { opacity: 1 });
+
+    // Set up horizontal scroll animation
+    const totalPanels = panels.length;
+    const totalWidth = totalPanels * 100;
+    gsap.set(element, { width: `${totalWidth}%` });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: element,
+        pin: true,
+        pinSpacing: true,
+        start: 'top top',
+        end: () => `+=${element.offsetHeight}`,
+        scrub: 1,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onEnter: () => {
+          gsap.set(element, { clearProps: "transform" });
+        },
+        onLeaveBack: () => {
+          gsap.set(element, { clearProps: "transform" });
+        },
+        onUpdate: (self) => {
+          const progress = self.progress;
+          gsap.to(bgLayer, { opacity: 1 - progress, duration: 0.1 });
+        }
+      }
+    });
+
+    tl.to(element, {
+      x: () => -(element.scrollWidth - window.innerWidth),
+      ease: 'none',
+      duration: 1
+    });
+
+    panels.forEach((panel, i) => {
+      const progress = i / (totalPanels - 1);
+      gsap.fromTo(panel, 
+        { 
+          opacity: i === 0 ? 1 : 0.5, 
+          scale: i === 0 ? 1 : 0.8 
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          scrollTrigger: {
+            trigger: panel,
+            containerAnimation: tl,
+            start: `left center-=${100 * progress}%`,
+            toggleActions: 'play none none reverse',
+            id: `panel-${i}`
+          }
+        }
+      );
+    });
+  } else if (direction === 'horizontal') {
     gsap.to(element, {
       x: () => -(element.scrollWidth - element.clientWidth),
       ease: 'none',
