@@ -5,6 +5,7 @@ import HeroCover from './heroCover';
 import HeroProducts from './heroProducts';
 import backgroundImage from '../../assets/line-bg-1.png';
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 interface HeroContentProps {
@@ -164,10 +165,7 @@ const HeroContent: React.FC<HeroContentProps> = ({ setupAnimation }) => {
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                 }}
-            />
-            
-            {/* We're using the background directly from the HeroProducts component */}
-            
+            />    
             {/* Content Sections */}
             <div 
                 ref={sectionsContainerRef}
@@ -180,7 +178,7 @@ const HeroContent: React.FC<HeroContentProps> = ({ setupAnimation }) => {
                     style={{ width: '100vw' }}
                 >
                     <div className="w-full">
-                        <HeroCover />
+                        <HeroCover setupAnimation={setupAnimation} />
                     </div>
                 </div>
                 <div 
