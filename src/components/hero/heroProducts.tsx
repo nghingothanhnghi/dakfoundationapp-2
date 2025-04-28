@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { HeroFeaturesGrid } from './heroFeaturesGrid';
 import { HeroBackgroundSection } from './heroBackgroundSection';
-import HeroProductBg from '../../assets/bg/hero_products-bg.svg'
 import HeroHeadline from './heroHeadline';
 
+interface HeroProductsProps {
+    setupAnimation: (element: HTMLElement) => void;
+}
 
-const HeroProducts: React.FC = () => {
+const HeroProducts: React.FC<HeroProductsProps> = ({ setupAnimation }) => {
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (containerRef.current) {
+            setupAnimation(containerRef.current);
+        }
+    }, [setupAnimation]);
     return (
         <HeroBackgroundSection
             background={`
@@ -18,7 +27,7 @@ const HeroProducts: React.FC = () => {
         // background="https://example.com/path/to/image.jpg"
         // isImage={true}
         >
-            <div className="flex flex-col items-center justify-center gap-8 z-10">
+            <div ref={containerRef} className="flex flex-col items-center justify-center gap-8 z-10">
                 <HeroHeadline />
                 <div className="relative" style={{ height: '300px' }}>
                     <HeroFeaturesGrid />
