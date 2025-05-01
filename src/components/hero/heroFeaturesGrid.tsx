@@ -1,4 +1,5 @@
 import React from "react";
+import HeroNeonGlobe from "./heroNeonGlobe";
 
 import Line15 from '../../assets/circle/Line-15.svg'
 import Line16 from '../../assets/circle/Line-16.svg'
@@ -18,35 +19,37 @@ import SuperAppIcon from "../../assets/products/superApp_icon.png"
 
 export const HeroFeaturesGrid: React.FC = () => {
   return (
-    <div className="w-full max-w-[1370px] h-[508px]">
-      <div className="relative h-[508px] w-full">
+    <div className="w-full max-w-[1370px] h-[200px] lg:h-[508px]">
+      <div className="relative h-[200px] lg:h-[508px] w-full">
+        <div className="relative lg:h-[400px] mx-aut lg:top-[-100px]">
+          <HeroNeonGlobe/>
+        </div>
         {/* Feature 1: Globalization with Decentralized Cloud */}
-        <div className="absolute w-[473px] h-[508px] top-0 left-0">
+        <div className="absolute w-[80px] h-[85px] lg:w-[473px] lg:h-[508px] top-0 left-0">
           <div className="relative h-[508px]">
             <img
-              className="absolute w-[204px] h-[287px] top-0 left-[269px]"
+              className="absolute w-[80px] h-[112px] lg:w-[204px] lg:h-[287px] lg:top-0 lg:left-[269px]"
               alt="Vector"
               src={Part15}
             />
 
-            <div className="w-[351px] items-end gap-3.5 top-[156px] left-0 flex flex-col absolute">
-
+            <div className="w-[80px] top-[52px] left-0 lg:w-[351px] lg:top-[156px] lg:left-0 flex flex-col items-end gap-3.5 absolute">
               <img
-                className="relative self-stretch w-[182px] h-[280.22px] top-0 left-0 "
+                className="relative self-stretch w-[80px] h-[123px] lg:w-[182px] lg:h-[280.22px] top-0 left-0  lg:top-0 lg:left-[120px]"
                 alt="Line"
                 src={Line15}
               />
               <div className="w-[353px] relative h-[58px] mr-[-2.00px]">
-                <div className="absolute w-[351px] top-0 left-0 font-sans font-bold text-white text-2xl text-center tracking-[0] leading-[normal]">
+                <h4 className="font-bold text-white text-2xl text-center tracking-[0] leading-[normal]">
                   Globalization <br />
                   with Decentralized Cloud
-                </div>
+                </h4>
               </div>
             </div>
 
-            <div className="absolute w-[110px] h-[110px] top-[89px] left-[308px]">
+            <div className="absolute w-[24px] h-[24px] top-[52px] left-[21px] lg:w-[110px] lg:h-[110px] lg:top-[89px] lg:left-[308px]">
               <img
-                className="w-[110px] h-[110px]"
+                className="w-[24px] h-[24px] lg:w-[110px] lg:h-[110px]"
                 alt="Cloud icon"
                 src={CloudIcon}
               />
@@ -71,9 +74,9 @@ export const HeroFeaturesGrid: React.FC = () => {
               />
 
               <div className="w-[341px] relative h-[58px] mr-[-2.00px]">
-                <div className="absolute w-[339px] top-0 left-0 font-sans font-bold text-white text-2xl text-center tracking-[0] leading-[normal]">
+                <h4 className="font-bold text-white text-2xl text-center tracking-[0] leading-[normal]">
                   Transparent Governance with Hybrid-Chain
-                </div>
+                </h4>
               </div>
             </div>
 
@@ -103,9 +106,9 @@ export const HeroFeaturesGrid: React.FC = () => {
               />
 
               <div className="w-[291px] relative h-[58px] mr-[-2.00px]">
-                <div className="absolute w-[289px] top-0 left-0 font-sans font-bold text-white text-2xl text-center tracking-[0] leading-[normal]">
+                <h4 className="font-bold text-white text-2xl text-center tracking-[0] leading-[normal]">
                   Automatic Production with Personal AI
-                </div>
+                </h4>
               </div>
             </div>
 
@@ -129,22 +132,16 @@ export const HeroFeaturesGrid: React.FC = () => {
             />
 
             <div className="w-[331px] items-start gap-5 top-[156px] left-[121px] flex flex-col absolute">
-            <img
-                    className="relative w-[168px] h-[274px] object-cover"
-                    alt="Line"
-                    src={Line18}
-                  />
-              {/* <div className="relative w-[168px] h-[274px] rotate-180 opacity-50">
-                <div className="relative h-[274px]">
-    
-                </div>
-              </div> */}
-
+              <img
+                className="relative w-[168px] h-[274px] object-cover"
+                alt="Line"
+                src={Line18}
+              />
               <div className="w-[333px] relative h-[58px] mr-[-2.00px]">
-                <div className="absolute w-[331px] top-0 left-0 font-sans font-bold text-white text-2xl text-center tracking-[0] leading-[normal]">
+                <h4 className="font-bold text-white text-2xl text-center tracking-[0] leading-[normal]">
                   Ultimate Personalization <br />
                   with One-In-All SuperApp
-                </div>
+                </h4>
               </div>
             </div>
 
@@ -154,12 +151,9 @@ export const HeroFeaturesGrid: React.FC = () => {
                 alt="Vector"
                 src={SuperAppIcon}
               />
-
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
 

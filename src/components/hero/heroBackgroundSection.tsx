@@ -2,7 +2,7 @@ import React from "react";
 
 interface HeroBackgroundSectionProps {
   children: React.ReactNode;
-  background: string; // Accepts either a CSS color/gradient or an image URL
+  background: string; // CSS background value (color, gradient, etc.)
   isImage?: boolean;  // Optional prop to specify if the background is an image
 }
 
@@ -11,16 +11,16 @@ export const HeroBackgroundSection: React.FC<HeroBackgroundSectionProps> = ({
   background,
   isImage = false,
 }) => {
-
-    const backgroundStyle = isImage
-    ? { backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }
-    : { background: background }; // Allows for complex CSS backgrounds
+  // Create the style object based on the type of background
+  const style = isImage 
+    ? { backgroundImage: `url(${background})` } 
+    : { background };
 
   return (
     <main
-     className="flex relative flex-col px-20 py-28 w-full min-h-[1117px] max-md:px-5 max-md:pt-24 max-md:max-w-full"
-     style={backgroundStyle}
-     >
+      className="flex relative flex-col px-20 py-10 w-full min-h-[1117px] overflow-hidden bg-cover bg-center"
+      style={style}
+    >
       {children}
     </main>
   );
