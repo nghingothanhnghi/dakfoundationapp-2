@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { HeroBackgroundSection } from '../../hero/heroBackgroundSection';
-import CloudDetailHeadline from './cloudDetailHeadline';
-interface CloudDetailProps {
+
+interface CloudDetailHowProps {
     setupAnimation: (element: HTMLElement) => void;
 }
 
-const CloudDetail: React.FC<CloudDetailProps> = ({ setupAnimation }) => {
+const CloudDetailHow: React.FC<CloudDetailHowProps> = ({ setupAnimation }) => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -14,16 +14,18 @@ const CloudDetail: React.FC<CloudDetailProps> = ({ setupAnimation }) => {
         }
     }, [setupAnimation]);
     const backgroundGradient = `
-        radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, #8C47CE 0%, #540EAB 100%)
+        linear-gradient(to bottom, hsla(275,52%,34%,1) 0%, hsla(275,52%,34%,1) 100%),
+        radial-gradient(at 14% 40%, hsla(250,100%,55%,1) 0px, transparent 50%),
+        radial-gradient(at 89% 63%, hsla(266,100%,55%,1) 0px, transparent 50%)
     `;
     
     return (
         <HeroBackgroundSection background={backgroundGradient} isImage={false}>
             <div ref={containerRef} className="flex flex-col items-center justify-center gap-8 z-10">
-                <CloudDetailHeadline setupAnimation={setupAnimation}/>
+
             </div>
         </HeroBackgroundSection>
     );
 };
 
-export default CloudDetail;
+export default CloudDetailHow;

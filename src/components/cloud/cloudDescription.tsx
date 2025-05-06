@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CloudDescription = React.forwardRef<HTMLDivElement, any>((props, ref) => {
+const CloudDescription = React.forwardRef<HTMLDivElement, any>((_props, ref) => {
   return (
     <section ref={ref} className="relative min-h-[460px] max-md:mt-10 max-md:max-w-full">
     <h1

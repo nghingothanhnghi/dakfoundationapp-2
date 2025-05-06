@@ -29,11 +29,16 @@ const CloudCover: React.FC<CloudCoverProps> = ({ setupAnimation }) => {
         }
     }, [setupAnimation]);
 
-    
+    const backgroundGradient = `
+    radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, #8C47CE 0%, #540EAB 100%)
+`;
+
+
     return (
-        <HeroBackgroundSection 
-            background="https://cdn.builder.io/api/v1/image/assets/TEMP/ebe850586a47258fd17035599f570eee37404e00?placeholderIfAbsent=true"
-            isImage={true}
+        <HeroBackgroundSection
+            // background="https://cdn.builder.io/api/v1/image/assets/TEMP/ebe850586a47258fd17035599f570eee37404e00?placeholderIfAbsent=true"
+            background={backgroundGradient}
+            isImage={false}
         >
             <div ref={containerRef} className="flex flex-col items-center justify-center gap-8 z-10">
                 <div className="relative w-full max-w-[1502px] max-md:max-w-full">

@@ -82,13 +82,8 @@ const CloudContent: React.FC<CloudContentProps> = ({ setupAnimation }) => {
         className="flex h-full w-full"
         style={{ width: '200vw', overflowX: 'hidden' }}
       >
-
         <CloudCover setupAnimation={setupAnimation} />
-
-
-
         <CloudDetail setupAnimation={setupAnimation} />
-
       </div>
     </div>
   );
