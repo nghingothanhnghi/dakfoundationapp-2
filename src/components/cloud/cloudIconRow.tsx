@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CloudIconsRow = React.forwardRef<HTMLDivElement, any>((props, ref) => {
+const CloudIconsRow = React.forwardRef<HTMLDivElement, any>((_props, ref) => {
   const icons = [
     { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/79f49d5f6b335654f1dbe4c5ea751ddd326727e1?placeholderIfAbsent=true", alt: "Cloud Service Icon 1", width: "w-28" },
     { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/c0b00e9b6f36a83a31ad0e10a7c336813c30a913?placeholderIfAbsent=true", alt: "Separator", width: "w-8" },

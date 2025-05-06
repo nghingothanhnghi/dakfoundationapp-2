@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { HeroFeaturesGrid } from './heroFeaturesGrid';
 import { HeroBackgroundSection } from './heroBackgroundSection';
 import HeroHeadline from './heroHeadline';
-import HeroProductBg from '../../assets/bg/hero_products-bg.svg'
 
 interface HeroProductsProps {
     setupAnimation: (element: HTMLElement) => void;
@@ -23,7 +22,7 @@ const HeroProducts: React.FC<HeroProductsProps> = ({ setupAnimation }) => {
     `;
     
     return (
-        <HeroBackgroundSection background={HeroProductBg} isImage={true}>
+        <HeroBackgroundSection background={backgroundGradient} isImage={false}>
             <div ref={containerRef} className="flex flex-col items-center justify-center gap-8 z-10">
                 <HeroHeadline />
                 <HeroFeaturesGrid />

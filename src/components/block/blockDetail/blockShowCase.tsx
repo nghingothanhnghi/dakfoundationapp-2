@@ -5,7 +5,7 @@ interface BlockShowCaseProps {
   // Add any props you need here
 }
 
-const BlockShowCase: React.FC<BlockShowCaseProps> = (props) => {
+const BlockShowCase: React.FC<BlockShowCaseProps> = (_props) => {
   return (
     <div className="block-showcase">
       <img src={BlockFeaturedHow} alt="Block Featured How" />
