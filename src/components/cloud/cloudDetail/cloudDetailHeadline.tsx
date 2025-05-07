@@ -16,10 +16,16 @@ const CloudDetailHeadline: React.FC<CloudDetailHeadlineProps> = ({ setupAnimatio
 
         <div
             ref={containerRef}
-            className="flex flex-col items-center justify-center gap-8 z-10"
+            className="gap-8 z-10"
         >
             <h1
-                className='justify-start text-fuchsia-500 text-7xl font-bold [text-shadow:_10px_6px_5px_rgb(217_91_255_/_0.50)]'
+                className='justify-start text-fuchsia-500 text-7xl font-bold bg-clip-text bg-gradient-to-l from-fuchsia-500 to-purple-200 [text-shadow:_10px_6px_5px_rgb(217_91_255_/_0.50)]'
+                style={{
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    WebkitTextStrokeWidth: "2px",
+                    WebkitTextStrokeColor: "#4AD0FF",
+                  }}
             >
                 The World’s 1st Social Cloud
             </h1>

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { HeroBackgroundSection } from '../../hero/heroBackgroundSection';
+import Circle from '../../circles/circles';
+
 
 interface CloudDetailFeaturesGridProps {
     setupAnimation: (element: HTMLElement) => void;
@@ -13,18 +14,26 @@ const CloudDetailFeaturesGrid: React.FC<CloudDetailFeaturesGridProps> = ({ setup
             setupAnimation(containerRef.current);
         }
     }, [setupAnimation]);
-    const backgroundGradient = `
-        linear-gradient(to bottom, hsla(275,52%,34%,1) 0%, hsla(275,52%,34%,1) 100%),
-        radial-gradient(at 14% 40%, hsla(250,100%,55%,1) 0px, transparent 50%),
-        radial-gradient(at 89% 63%, hsla(266,100%,55%,1) 0px, transparent 50%)
-    `;
-    
-    return (
-        <HeroBackgroundSection background={backgroundGradient} isImage={false}>
-            <div ref={containerRef} className="flex flex-col items-center justify-center gap-8 z-10">
 
+    return (
+        <div
+            ref={containerRef}
+            className="w-full h-full"
+        >
+            <div className='flex relative align-top'>
+                <div className='flex align-top'>
+                    <div className='relative w-266'>
+                        <Circle type="type1" className='' />
+                    </div>
+                    <div className='relative w-310 left-[-39px] top-[-119px]'>
+                        <Circle type="type2" className='' />
+                    </div>
+                    <div className='relative w-269 left-[-74px] top-[-6px]'>
+                        <Circle type="type3" className='' />
+                    </div>
+                </div>
             </div>
-        </HeroBackgroundSection>
+        </div>
     );
 };
 

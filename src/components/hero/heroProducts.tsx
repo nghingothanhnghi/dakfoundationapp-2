@@ -16,9 +16,7 @@ const HeroProducts: React.FC<HeroProductsProps> = ({ setupAnimation }) => {
         }
     }, [setupAnimation]);
     const backgroundGradient = `
-        linear-gradient(to bottom, hsla(275,52%,34%,1) 0%, hsla(275,52%,34%,1) 100%),
-        radial-gradient(at 14% 40%, hsla(250,100%,55%,1) 0px, transparent 50%),
-        radial-gradient(at 89% 63%, hsla(266,100%,55%,1) 0px, transparent 50%)
+        radial-gradient(50% 50% at 50% 50%, #7000A8 0%, #622A88 100%);
     `;
     
     return (
