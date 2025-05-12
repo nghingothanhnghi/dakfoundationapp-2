@@ -16,7 +16,7 @@ const CloudDetailHeadline: React.FC<CloudDetailHeadlineProps> = ({ setupAnimatio
 
         <div
             ref={containerRef}
-            className="gap-8 z-10"
+            className="w-full gap-8 z-10"
         >
             <h1
                 className='justify-start text-fuchsia-500 text-5xl lg:text-7xl font-bold bg-clip-text bg-gradient-to-l from-fuchsia-500 to-purple-200 [text-shadow:_10px_6px_5px_rgb(217_91_255_/_0.50)]'

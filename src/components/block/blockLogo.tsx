@@ -1,16 +1,19 @@
-import * as React from "react";
+import React from "react";
 import BlockIcon from "../../assets/products/block_icon.png"
 
-export const BlockLogo: React.FC = () => {
+
+const BlockLogo = React.forwardRef<HTMLDivElement, any>((_props, ref) => {
   return (
-    <section className="flex relative flex-col grow items-center mt-40 h-[412px] max-md:mt-10 max-md:max-w-full">
-      <div className="flex overflow-hidden flex-col justify-center px-5 py-24 max-w-full rotate-[-1.757587853035147e-8rad] w-[411px]">
+    <section className="flex relative flex-col grow items-center mt-40 max-md:mt-10 max-md:max-w-full">
+      <div ref={ref} className="flex flex-col justify-center px-5 py-24 max-w-full">
         <img
           src={BlockIcon}
           alt="DAK Cloud Logo"
-          className="object-contain w-full"
+          className="object-contain w-full aspect-[1.78]"
         />
       </div>
     </section>
   );
-};
+});
+
+export default BlockLogo;
