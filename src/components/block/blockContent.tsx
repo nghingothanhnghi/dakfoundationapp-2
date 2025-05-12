@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import BlockCover from './blockCover';
+import BlockDetail from './blockDetail/blockDetail';
 import { setupScrollAnimation } from '../../utils/animationUtils';
 
 interface BlockContentProps {
@@ -42,6 +43,7 @@ const BlockContent: React.FC<BlockContentProps> = ({ setupAnimation }) => {
         style={{ width: '200vw', overflowX: 'hidden' }}
       >
         <BlockCover setupAnimation={setupAnimation} />
+        <BlockDetail setupAnimation={setupAnimation}/>
       </div>
     </div>
   );

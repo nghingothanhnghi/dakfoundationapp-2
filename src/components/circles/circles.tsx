@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface CircleProps {
-  type: 'type1' | 'type2' | 'type3'; // Define the types of circles you have
+  type: 'type1' | 'type2' | 'type3' | 'type4'; // Define the types of circles you have
   fill?: string;
   className?: string; // Add className prop
   icon?: React.ReactNode; // Add icon prop
@@ -60,6 +60,20 @@ const Circle: React.FC<CircleProps> = ({ type, fill = 'white', className, icon }
           {renderIcon()}
         </svg>
       );
+      case 'type4':
+        return (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ width: '100%', height: '100%' }}
+            viewBox="0 0 266 267"
+            fill="none"
+            className={className} // Apply className
+          >
+            <path d="M109.794 0.847988L0.730713 43.7563C44.3101 146.587 123.838 223.807 218.777 266.484L265.525 159.034C198.076 128.344 141.473 73.5758 109.794 0.847988Z" fill={fill} />
+            {renderIcon()}
+          </svg>
+        );
+
     default:
       return null;
   }

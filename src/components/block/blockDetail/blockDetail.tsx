@@ -20,13 +20,10 @@ const BlockDetail: React.FC<BlockDetailProps> = ({ setupAnimation }) => {
 
     return (
         <HeroBackgroundSection background={backgroundGradient} isImage={false}>
-            <div ref={containerRef} className="flex flex-col items-center justify-center gap-8 z-10">
-                
+            <div ref={containerRef} className="flex flex-col items-center justify-center gap-8 z-10"> 
                 <div className='lg:flex lg:gap-12'>
                     <BlockDetailFeaturesGrid setupAnimation={setupAnimation} />
-
                 </div>
-
             </div>
         </HeroBackgroundSection>
     );
