@@ -19,7 +19,7 @@ const CloudDetailHeadline: React.FC<CloudDetailHeadlineProps> = ({ setupAnimatio
             className="gap-8 z-10"
         >
             <h1
-                className='justify-start text-fuchsia-500 text-7xl font-bold bg-clip-text bg-gradient-to-l from-fuchsia-500 to-purple-200 [text-shadow:_10px_6px_5px_rgb(217_91_255_/_0.50)]'
+                className='justify-start text-fuchsia-500 text-5xl lg:text-7xl font-bold bg-clip-text bg-gradient-to-l from-fuchsia-500 to-purple-200 [text-shadow:_10px_6px_5px_rgb(217_91_255_/_0.50)]'
                 style={{
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
@@ -30,7 +30,7 @@ const CloudDetailHeadline: React.FC<CloudDetailHeadlineProps> = ({ setupAnimatio
                 The World’s 1st Social Cloud
             </h1>
             <div
-                className="self-stretch opacity-80 justify-start text-white text-4xl font-bold"
+                className="mt-2 self-stretch opacity-80 justify-start text-white text-2xl lg:text-4xl font-bold"
             >
                 Where your unused device becomes a powerhouse for innovation
             </div>

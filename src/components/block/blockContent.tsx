@@ -1,38 +1,49 @@
 import React, { useEffect, useRef } from 'react';
-import { BlockBackgroundSection } from "./blockBackgroundSection";
-import { BlockLogo } from "./blockLogo";
-import { BlockDescription } from "./blockDescription";
-import { BlockIconsRow } from "./blockIconRow";
+import BlockCover from './blockCover';
+import { setupScrollAnimation } from '../../utils/animationUtils';
 
 interface BlockContentProps {
-  setupAnimation: (element: HTMLElement) => void;
+  setupAnimation: (element: HTMLElement, options?: { type?: string; direction?: 'vertical' | 'horizontal' }) => void;
 }
 
 const BlockContent: React.FC<BlockContentProps> = ({ setupAnimation }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const sectionsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (containerRef.current) {
-      setupAnimation(containerRef.current);
+    const container = containerRef.current;
+    const sectionsContainer = sectionsContainerRef.current;
+
+    if (container && sectionsContainer) {
+      // Use the enhanced setupScrollAnimation function with horizontalScroll type
+      const cleanup = setupScrollAnimation(container, {
+        type: 'horizontalScroll',
+        sectionsContainer: sectionsContainer,
+        totalWidth: 200, // Two panels, each 100vw
+        scrubAmount: 1,
+        ease: 'none',
+        duration: 1
+      });
+
+      // Return the cleanup function
+      return cleanup;
     }
   }, [setupAnimation]);
   return (
-    <BlockBackgroundSection>
+    <div
+      ref={containerRef}
+      className="relative w-full h-screen overflow-hidden will-change-transform"
+      style={{ margin: 0, padding: 0, overflowX: 'hidden' }}
+    >
+      {/* Content Sections */}
       <div
-        ref={containerRef}
-        className="relative w-full max-w-[1502px] max-md:max-w-full"
+        ref={sectionsContainerRef}
+        className="flex h-full w-full"
+        style={{ width: '200vw', overflowX: 'hidden' }}
       >
-        <div className="flex gap-5 max-md:flex-col">
-          <div className="w-[31%] max-md:ml-0 max-md:w-full">
-            <BlockLogo />
-          </div>
-          <div className="ml-5 w-[69%] max-md:ml-0 max-md:w-full">
-            <BlockDescription />
-          </div>
-        </div>
+        <BlockCover setupAnimation={setupAnimation} />
       </div>
-      <BlockIconsRow />
-    </BlockBackgroundSection>
+    </div>
   );
 }
 export default BlockContent;

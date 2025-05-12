@@ -43,7 +43,7 @@ const HeroHeadline: React.FC = () => {
     <div className="w-full max-w-[1200px] inline-flex flex-col justify-start items-center gap-5 px-4">
       <div 
         ref={line1Ref}
-        className="text-center text-7xl font-bold bg-clip-text bg-[linear-gradient(347deg,#DE61E6_27.04%,#E4D2F3_58.95%)] [text-shadow:_10px_6px_5px_rgb(217_91_255_/_0.50)]"
+        className="text-center text-5xl lg:text-7xl font-bold bg-clip-text bg-[linear-gradient(347deg,#DE61E6_27.04%,#E4D2F3_58.95%)] [text-shadow:_10px_6px_5px_rgb(217_91_255_/_0.50)]"
         style={{
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
@@ -55,7 +55,7 @@ const HeroHeadline: React.FC = () => {
       </div>
       <div 
         ref={line2Ref}
-        className="w-full max-w-[801px] text-center  text-5xl font-bold bg-[linear-gradient(347deg,#DE61E6_27.04%,#E4D2F3_58.95%)] leading-[63px] [text-shadow:_10px_6px_5px_rgb(198_46_241_/_0.50)]"
+        className="w-full max-w-[801px] text-center text-3xl lg:text-5xl lg:font-bold bg-[linear-gradient(347deg,#DE61E6_27.04%,#E4D2F3_58.95%)] [text-shadow:_10px_6px_5px_rgb(198_46_241_/_0.50)]"
         style={{
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",

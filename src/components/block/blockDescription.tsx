@@ -1,8 +1,8 @@
-import * as React from "react";
+import React from 'react';
 
-export const BlockDescription: React.FC = () => {
+const BlockDescription = React.forwardRef<HTMLDivElement, any>((_props, ref) => {
   return (
-    <section className="relative min-h-[460px] max-md:mt-10 max-md:max-w-full">
+    <section ref={ref} className="relative min-h-[460px] max-md:mt-10 max-md:max-w-full">
       <h1
         className="text-8xl font-bold bg-clip-text bg-[linear-gradient(347deg,#DE61E6_27.04%,#E4D2F3_58.95%)] [text-shadow:_10px_6px_5px_rgb(217_91_255_/_0.50)] max-md:max-w-full max-md:text-4xl"
         style={{
@@ -55,4 +55,6 @@ export const BlockDescription: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+export default BlockDescription;

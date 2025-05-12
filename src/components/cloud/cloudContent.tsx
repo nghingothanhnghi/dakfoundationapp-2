@@ -1,10 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CloudCover from './cloudCover';
 import CloudDetail from './cloudDetail/cloudDetail';
-
-gsap.registerPlugin(ScrollTrigger);
+import { setupScrollAnimation } from '../../utils/animationUtils';
 
 interface CloudContentProps {
   setupAnimation: (element: HTMLElement, options?: { type?: string; direction?: 'vertical' | 'horizontal' }) => void;
@@ -18,55 +15,19 @@ const CloudContent: React.FC<CloudContentProps> = ({ setupAnimation }) => {
     const container = containerRef.current;
     const sectionsContainer = sectionsContainerRef.current;
 
-    const handleResize = () => {
-      ScrollTrigger.refresh();
-    };
-
-    window.addEventListener('resize', handleResize);
-
     if (container && sectionsContainer) {
-      // Set up the container width
-      const totalWidth = 200; // Two panels, each 100vw
-      gsap.set(sectionsContainer, { width: `${totalWidth}%` });
-
-      // Create the ScrollTrigger animation
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container,
-          pin: true,
-          pinSpacing: true,
-          start: 'top top',
-          end: () => `+=${container.offsetHeight}`,
-          scrub: 1,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onEnter: () => {
-            gsap.set(container, { clearProps: "transform" });
-          },
-          onLeaveBack: () => {
-            gsap.set(container, { clearProps: "transform" });
-          }
-        }
-      });
-
-      // Animate the horizontal scroll
-      tl.to(sectionsContainer, {
-        x: () => -(sectionsContainer.offsetWidth - window.innerWidth),
+      // Use the enhanced setupScrollAnimation function with horizontalScroll type
+      const cleanup = setupScrollAnimation(container, {
+        type: 'horizontalScroll',
+        sectionsContainer: sectionsContainer,
+        totalWidth: 200, // Two panels, each 100vw
+        scrubAmount: 1,
         ease: 'none',
         duration: 1
       });
 
-      return () => {
-        window.removeEventListener('resize', handleResize);
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-        gsap.killTweensOf([container, sectionsContainer]);
-        if (container) {
-          gsap.set(container, { clearProps: "all" });
-        }
-        if (sectionsContainer) {
-          gsap.set(sectionsContainer, { clearProps: "all" });
-        }
-      };
+      // Return the cleanup function
+      return cleanup;
     }
   }, [setupAnimation]);
 

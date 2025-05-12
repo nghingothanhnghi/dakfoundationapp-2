@@ -13,13 +13,49 @@ interface AnimationOptions {
   direction?: 'vertical' | 'horizontal';
   panels?: HTMLElement[];
   bgLayer?: HTMLElement;
+  totalWidth?: number;
+  sectionsContainer?: HTMLElement;
+  scrubAmount?: number;
 }
 
+// This function will be removed as we're integrating its functionality into setupScrollAnimation
+
+/**
+ * Sets up various scroll animations with GSAP and ScrollTrigger
+ * @param element The main element to animate
+ * @param options Animation options for customization
+ * @returns A cleanup function for some animation types
+ */
 export const setupScrollAnimation = (
   element: HTMLElement,
   options: AnimationOptions = {}
 ) => {
-  const { opacity = 1, y = 0, duration = 1, ease = 'power3.out', type = 'default', direction = 'vertical', panels, bgLayer } = options;
+  const { 
+    opacity = 1, 
+    y = 0, 
+    duration = 1, 
+    ease = 'power3.out', 
+    type = 'default', 
+    direction = 'vertical', 
+    panels, 
+    bgLayer,
+    sectionsContainer,
+    totalWidth = 200,
+    scrubAmount = 1
+  } = options;
+
+  // Set up resize handler for animations that need it
+  const handleResize = () => {
+    ScrollTrigger.refresh();
+  };
+
+  // Add resize listener for certain animation types
+  if (type === 'hero' || type === 'horizontalScroll' || direction === 'horizontal') {
+    window.addEventListener('resize', handleResize);
+  }
+
+  // Create a cleanup function that will be returned for certain animation types
+  let cleanup = () => {};
 
   if (type === 'hero') {
     if (!panels || !bgLayer) {
@@ -44,8 +80,8 @@ export const setupScrollAnimation = (
 
     // Set up horizontal scroll animation
     const totalPanels = panels.length;
-    const totalWidth = totalPanels * 100;
-    gsap.set(element, { width: `${totalWidth}%` });
+    const panelTotalWidth = totalPanels * 100;
+    gsap.set(element, { width: `${panelTotalWidth}%` });
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -97,7 +133,59 @@ export const setupScrollAnimation = (
         }
       );
     });
-  } else if (direction === 'horizontal') {
+
+    // Set up cleanup function
+    cleanup = () => {
+      window.removeEventListener('resize', handleResize);
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      gsap.killTweensOf([element, bgLayer, ...panels]);
+      gsap.set(element, { clearProps: "all" });
+      gsap.set(bgLayer, { clearProps: "all" });
+      panels.forEach(panel => gsap.set(panel, { clearProps: "all" }));
+    };
+  } 
+  // New type for horizontal scroll with sections container
+  else if (type === 'horizontalScroll' && sectionsContainer) {
+    // Set up the container width
+    gsap.set(sectionsContainer, { width: `${totalWidth}%` });
+
+    // Create the ScrollTrigger animation
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: element,
+        pin: true,
+        pinSpacing: true,
+        start: 'top top',
+        end: () => `+=${element.offsetHeight}`,
+        scrub: scrubAmount,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onEnter: () => {
+          gsap.set(element, { clearProps: "transform" });
+        },
+        onLeaveBack: () => {
+          gsap.set(element, { clearProps: "transform" });
+        }
+      }
+    });
+
+    // Animate the horizontal scroll
+    tl.to(sectionsContainer, {
+      x: () => -(sectionsContainer.offsetWidth - window.innerWidth),
+      ease: ease === 'power3.out' ? 'none' : ease, // Default to 'none' for horizontal scroll
+      duration
+    });
+
+    // Set up cleanup function
+    cleanup = () => {
+      window.removeEventListener('resize', handleResize);
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      gsap.killTweensOf([element, sectionsContainer]);
+      gsap.set(element, { clearProps: "all" });
+      gsap.set(sectionsContainer, { clearProps: "all" });
+    };
+  }
+  else if (direction === 'horizontal') {
     gsap.to(element, {
       x: () => -(element.scrollWidth - element.clientWidth),
       ease: 'none',
@@ -110,7 +198,16 @@ export const setupScrollAnimation = (
         anticipatePin: 1,
       },
     });
-  } else if (type === 'cloudLogo' || type === 'cloudDescription' || type === 'cloudIconsRow') {
+
+    // Set up cleanup function
+    cleanup = () => {
+      window.removeEventListener('resize', handleResize);
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      gsap.killTweensOf(element);
+      gsap.set(element, { clearProps: "all" });
+    };
+  } 
+  else if (type === 'cloudLogo' || type === 'cloudDescription' || type === 'cloudIconsRow') {
     gsap.fromTo(
       element,
       { y: '100%' },
@@ -124,7 +221,8 @@ export const setupScrollAnimation = (
         },
       }
     );
-  } else {
+  } 
+  else {
     gsap.fromTo(
       element,
       { opacity: 0, y: 50 },
@@ -141,4 +239,7 @@ export const setupScrollAnimation = (
       }
     );
   }
+
+  // Return the cleanup function for animation types that need it
+  return cleanup;
 };
