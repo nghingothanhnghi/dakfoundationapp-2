@@ -25,8 +25,6 @@ const CloudDetailFeaturesGrid: React.FC<CloudDetailFeaturesGridProps> = ({ setup
     }, [setupAnimation]);
 
     return (
-
-
         <div
             ref={containerRef}
             className='md:w:[65%] flex flex-col md:flex relative align-top mt-8'
