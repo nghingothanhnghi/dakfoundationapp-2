@@ -29,15 +29,27 @@ const BlockDetailFeaturesGrid: React.FC<BlockDetailFeaturesGridProps> = ({ setup
 
             </div>
             <div className='flex align-top max-md:flex-col relative'>
-                <div className='relative w-[266px] md:w-[150px] sm:w-[150px]'>
+                <div className='relative w-[100px] md:w-[109px] 3xl:w-[295px]'>
                     <Circle
                         type="type4"
                         className=''
                     // icon={<img src={SmeIcon} alt="icon" style={{ width: '100', height: '100px' }} />}
                     />
-
                 </div>
-
+                <div className='relative w-[100px] md:w-[108px] md:top-[20px] 3xl:w-[285px]'>
+                    <Circle
+                        type="type5"
+                        className=''
+                    // icon={<img src={SmeIcon} alt="icon" style={{ width: '100', height: '100px' }} />}
+                    />
+                </div>
+                <div className='relative w-[100px] md:w-[107px] 3xl:w-[288px]'>
+                    <Circle
+                        type="type6"
+                        className=''
+                    // icon={<img src={SmeIcon} alt="icon" style={{ width: '100', height: '100px' }} />}
+                    />
+                </div>
             </div>
 
         </div>
